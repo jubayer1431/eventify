@@ -3,17 +3,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Button } from '../ui/button';
+import NavItems from './NavItems';
+import MobileNav from './MobileNav';
 
 const Header = () => {
   return (
-    <header className={'w-full border-b bg-black'}>
+    <header className={'w-full border-b bg-slate-950 text-white'}>
       <div className='wrapper flex items-center justify-between'>
         <Link href={'/'} className={'w-36'}>
           <Image src={'/assets/images/logo.svg'} width={128} height={38} alt={'Logo'} />
         </Link>
+
+        <SignedIn>
+          <nav className={'md:flex-between hidden max-w-xs w-full'}>
+            <NavItems />
+          </nav>
+        </SignedIn>
+
         <div className='flex w-32 justify-end gap-3'>
           <SignedIn>
             <UserButton afterSignOutUrl={'/'} />
+            <MobileNav />
           </SignedIn>
           <SignedOut>
             <Button asChild className={'rounded-full'} size={'lg'}>
