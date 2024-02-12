@@ -14,11 +14,11 @@ const Header = () => {
           <Image src={'/assets/images/logo.svg'} width={128} height={38} alt={'Logo'} />
         </Link>
 
-        <SignedIn>
-          <nav className={'md:flex-between hidden max-w-xs w-full'}>
-            <NavItems />
-          </nav>
-        </SignedIn>
+        {/* <SignedIn> */}
+        <nav className={'md:flex-between hidden max-w-xs w-full'}>
+          <NavItems />
+        </nav>
+        {/* </SignedIn> */}
 
         <div className='flex w-32 justify-end gap-3'>
           <SignedIn>
