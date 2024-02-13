@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ICategory } from '@/lib/database/models/category.model';
-import { startTransition, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,6 +20,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Input } from '../ui/input';
+import { createCategory, getAllCategories } from '@/lib/actions/category.actions';
 
 type DropdownProps = {
   value?: string;
@@ -27,14 +28,24 @@ type DropdownProps = {
 };
 
 const Dropdown = ({ onChangeHandler, value }: DropdownProps) => {
-  const [categories, setcategories] = useState<ICategory[]>([
-    { _id: 1, name: 'cate 1' },
-    { _id: 2, name: 'cate 2' },
-  ]);
-
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [newCategory, setNewCategory] = useState('');
 
-  const handleAddCategory = () => {};
+  const handleAddCategory = () => {
+    createCategory({
+      categoryName: newCategory.trim(),
+    }).then((category) => {
+      setCategories((prevState) => [...prevState, category]);
+    });
+  };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesList = await getAllCategories();
+      categoriesList && setCategories(categoriesList as ICategory[]);
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
@@ -58,7 +69,7 @@ const Dropdown = ({ onChangeHandler, value }: DropdownProps) => {
               'p-medium-14 flex w-full rounded-sm py-3 pl-8 text-primary-500 hover:bg-primary-50 focus:text-primary-500'
             }
           >
-            Open
+            Add New Category
           </AlertDialogTrigger>
           <AlertDialogContent className='bg-white'>
             <AlertDialogHeader>

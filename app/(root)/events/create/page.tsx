@@ -4,7 +4,6 @@ import { auth } from '@clerk/nextjs';
 const CreateEvent = () => {
   const { sessionClaims } = auth();
   const userId = sessionClaims?.userId as string;
-
   return (
     <>
       <section className={'py-5 md:py-10'}>
