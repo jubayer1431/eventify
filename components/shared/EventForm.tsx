@@ -202,7 +202,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
         <div className='flex flex-col gap-5 md:flex-row'>
           <FormField
             control={form.control}
-            name='startDateTime'
+            name='price'
             render={({ field }) => (
               <FormItem className={'w-full'}>
                 <FormControl>
@@ -255,7 +255,7 @@ const EventForm = ({ userId, type }: EventFormProps) => {
           />
           <FormField
             control={form.control}
-            name='URL'
+            name='url'
             render={({ field }) => (
               <FormItem className={'w-full'}>
                 <FormControl>
