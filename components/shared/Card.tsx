@@ -40,10 +40,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         </div>
       )}
 
-      <Link
-        href={`/events/${event._id}`}
-        className={'flex min-h-[230px] flex-col gap-3 p-5 md:gap-4'}
-      >
+      <div className={'flex min-h-[230px] flex-col gap-3 p-5 md:gap-4'}>
         {!hidePrice && (
           <div className={'flex gap-2'}>
             <span
@@ -65,14 +62,16 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         <p className={'p-medium-16 md:p-medium-18 text-grey-500'}>
           {formatDateTime(event.startDateTime).dateTime}
         </p>
-        <p className={'p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black'}>
-          {event.title}
-        </p>
+        <Link href={`/events/${event._id}`}>
+          <p className={'p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black'}>
+            {event.title}
+          </p>
+        </Link>
         <div className='flex-between w-full'>
           <p className={'p-medium-14 md:p-medium-16 text-gray-600'}>
             {event.organizer?.firstName} {event.organizer?.lastName}
           </p>
-          {!hasOrderLink && (
+          {hasOrderLink && (
             <Link href={`/orders?eventId=${event._id}`} className={'flex gap-2'}>
               <p className={'text-primary-500'}>Order Details:</p>
               <Image
@@ -84,7 +83,7 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
             </Link>
           )}
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
