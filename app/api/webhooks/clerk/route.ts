@@ -59,7 +59,6 @@ export async function POST(req: Request) {
   console.log('Webhook body:', body);
 
   if (eventType === 'user.created') {
-    console.log('🚀 ~ POST ~ user:', 'user.created =>', evt.data);
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
@@ -71,6 +70,7 @@ export async function POST(req: Request) {
       photo: image_url,
     };
 
+    console.log('🚀 ~ POST ~ user:', 'user.created =>', user);
     const newUser = await createUser(user);
 
     if (newUser) {
