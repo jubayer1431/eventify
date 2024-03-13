@@ -1,5 +1,3 @@
-'use server';
-
 import stripe from 'stripe';
 import { NextResponse } from 'next/server';
 import { createOrder } from '@/lib/actions/order.actions';
